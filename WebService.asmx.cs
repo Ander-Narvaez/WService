@@ -7,6 +7,7 @@ using System.Web.Services;
 
 namespace WService
 {
+
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
