@@ -15,7 +15,7 @@ namespace WService
     {
 
         CapaDatos.Clases.ClsPersonas vClspersonas = new CapaDatos.Clases.ClsPersonas();
-        //CapaDatos.Clases.ClsMedicos vClsmedicos = new CapaDatos.Clases.ClsMedicos();
+        CapaDatos.Clases.ClsMedicos vClsmedicos = new CapaDatos.Clases.ClsMedicos();
 
         [WebMethod]
         public string MantenimientoPersona(string pNif, String pNombre_Completo, String pDireccion, String pTelefono, String pPoblacion, String pProvincia, String pCodigo_Postal, String pNum_Seguridad_Social, String pAccion)
@@ -49,28 +49,27 @@ namespace WService
         }
 
         [WebMethod]
-       // public string MantenimientoMedico(string pNif_Medico, DateTime pFecha_Alta, DateTime pFecha_Baja, String pNum_Colegiado, String pEstatus, String pAccion)
-       // {
-            //this.vClsmedicos.aNif = pNif_Medico;
-            //this.vClsmedicos.aNombre_Completo = pFecha_Alta;
-            //this.vClsmedicos.aDireccion = pFecha_Baja;
-            //this.vClsmedicos.aTelefono = pNum_Colegiado;
-            //this.vClsmedicos.aPoblacion = pEstatus;
+        public string MantenimientoMedico(string pNif_Medico, DateTime pFecha_Alta, DateTime pFecha_Baja, String pNum_Colegiado, String pEstatus, String pAccion)
+        {
+            this.vClsmedicos.aNif_Medico = pNif_Medico;
+            this.vClsmedicos.aFecha_Alta = pFecha_Alta;
+            this.vClsmedicos.aFecha_Baja = pFecha_Baja;
+            this.vClsmedicos.aNum_Colegiado = pNum_Colegiado;
+            this.vClsmedicos.aEstatus = pEstatus;
 
-            //return vClspersonas.MantenimientoMedico(vClsmedicos, pAccion);
-        //}
+            return vClsmedicos.MantenimientoMedicos(vClsmedicos, pAccion);
+        }
 
         [WebMethod]
-        //public DataSet GetListaMedicos(string pNif_Medico, DateTime pFecha_Alta, DateTime pFecha_Baja, String pNum_Colegiado, String pEstatus, String pAccion)
-        //{
-            //DataSet Dts = new DataSet();
-            //this.vClsmedicos.aNif = pNif_Medico;
-            //this.vClsmedicos.aNombre_Completo = pFecha_Alta;
-            //this.vClsmedicos.aDireccion = pFecha_Baja;
-            //this.vClsmedicos.aTelefono = pNum_Colegiado;
-            //this.vClsmedicos.aPoblacion = pEstatus;
-        
-            //return vClspersonas.GetListaMedico(vClsmedicos, pAccion);
-        //}
+        public DataSet GetListaMedicos(string pNif_Medico, DateTime pFecha_Alta, DateTime pFecha_Baja, String pNum_Colegiado, String pEstatus, String pAccion)
+        {
+            DataSet Dts = new DataSet();
+            this.vClsmedicos.aNif_Medico = pNif_Medico;
+            this.vClsmedicos.aFecha_Alta = pFecha_Alta;
+            this.vClsmedicos.aFecha_Baja = pFecha_Baja;
+            this.vClsmedicos.aNum_Colegiado = pNum_Colegiado; 
+
+            return vClsmedicos.GetListaMedicos(vClsmedicos, pAccion);
+        }
     }
 }
