@@ -48,12 +48,18 @@ namespace WService
             return vClspersonas.GetListaPersonas(vClspersonas, pAccion);
         }
 
+
+        public DateTime Convert_Date(String pFecha)
+        {
+            return DateTime.Parse(pFecha);
+        }
+
         [WebMethod]
         public string MantenimientoMedico(string pNif_Medico, String pFecha_Alta, String pFecha_Baja, String pNum_Colegiado, String pEstatus, String pAccion)
         {
             this.vClsmedicos.aNif_Medico = pNif_Medico;
-            this.vClsmedicos.aFecha_Alta = DateTime.ParseExact(pFecha_Alta, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US")); 
-            this.vClsmedicos.aFecha_Baja = DateTime.ParseExact(pFecha_Baja, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US")); 
+            this.vClsmedicos.aFecha_Alta = Convert_Date(pFecha_Alta);
+            this.vClsmedicos.aFecha_Baja = Convert_Date(pFecha_Baja); 
             this.vClsmedicos.aNum_Colegiado = pNum_Colegiado;
             this.vClsmedicos.aEstatus = pEstatus;
 
@@ -63,17 +69,18 @@ namespace WService
         [WebMethod]
         public DataSet GetListaMedicos(string pNif_Medico, String pFecha_Alta, String pFecha_Baja, String pNum_Colegiado, String pEstatus, String pAccion)
         {
-
+            
             DataSet Dts = new DataSet();
-            this.vClsmedicos.aNif_Medico = pNif_Medico; 
-            if(pFecha_Alta != "" & pFecha_Baja != "")
-            {
-                this.vClsmedicos.aFecha_Alta = DateTime.ParseExact(pFecha_Alta, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
-                this.vClsmedicos.aFecha_Baja = DateTime.ParseExact(pFecha_Baja, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
-            }
+            this.vClsmedicos.aNif_Medico = pNif_Medico;   
             this.vClsmedicos.aNum_Colegiado = pNum_Colegiado;
-
-           
+            if (pFecha_Alta != "0001-01-01T00:00:00")
+            {
+                if (pFecha_Alta != "" & pFecha_Baja != "")
+                {
+                    this.vClsmedicos.aFecha_Alta = DateTime.ParseExact(pFecha_Alta, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+                    this.vClsmedicos.aFecha_Baja = DateTime.ParseExact(pFecha_Baja, "dd/MM/yyyy", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+                }
+            }
             return vClsmedicos.GetListaMedicos(vClsmedicos, pAccion);
         }
     }
