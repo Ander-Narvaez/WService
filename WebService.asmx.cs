@@ -14,11 +14,12 @@ namespace WService
     public class WebService : System.Web.Services.WebService
     {
 
-        CapaDatos.Clases.ClsPersonas vClspersonas   = new CapaDatos.Clases.ClsPersonas();
-        CapaDatos.Clases.ClsMedicos vClsmedicos     = new CapaDatos.Clases.ClsMedicos();
-        CapaDatos.Clases.ClsEmpleados vClsempleados = new CapaDatos.Clases.ClsEmpleados();
-        CapaDatos.Clases.ClsPacientes vClspacientes = new CapaDatos.Clases.ClsPacientes();
-        CapaDatos.Clases.ClsHorarios vClshorarios   = new CapaDatos.Clases.ClsHorarios();
+        CapaDatos.Clases.ClsPersonas vClspersonas     = new CapaDatos.Clases.ClsPersonas();
+        CapaDatos.Clases.ClsMedicos vClsmedicos       = new CapaDatos.Clases.ClsMedicos();
+        CapaDatos.Clases.ClsEmpleados vClsempleados   = new CapaDatos.Clases.ClsEmpleados();
+        CapaDatos.Clases.ClsPacientes vClspacientes   = new CapaDatos.Clases.ClsPacientes();
+        CapaDatos.Clases.ClsHorarios vClshorarios     = new CapaDatos.Clases.ClsHorarios();
+        CapaDatos.Clases.ClsVacaciones vClsvacaciones = new CapaDatos.Clases.ClsVacaciones();
 
         [WebMethod]
         public string MantenimientoPersona(string pNif, String pNombre_Completo, String pDireccion, String pTelefono, String pPoblacion, String pProvincia, String pCodigo_Postal, String pNum_Seguridad_Social, String pAccion)
@@ -126,8 +127,9 @@ namespace WService
         }
 
         [WebMethod]
-        public string MantenimientoHorarios(string pDia, String pJornada, String pMedico, String pAccion)
+        public string MantenimientoHorarios(string pCodigoH, String pDia, String pJornada, String pMedico, String pAccion)
         {
+            this.vClshorarios.aCodigoH = pCodigoH;
             this.vClshorarios.aDia = pDia;
             this.vClshorarios.aJornada = pJornada;
             this.vClshorarios.aMedico = pMedico;
@@ -136,13 +138,30 @@ namespace WService
         }
 
         [WebMethod]
-        public DataSet GetListaHorarios(string pDia, String pJornada, String pMedico, String pAccion)
+        public DataSet GetListaHorarios(string pCodigoH, String pDia, String pJornada, String pMedico, String pAccion)
         {
+            this.vClshorarios.aCodigoH = pCodigoH;
             this.vClshorarios.aDia = pDia;
             this.vClshorarios.aJornada = pJornada;
             this.vClshorarios.aMedico = pMedico;
 
             return vClshorarios.GetListaHorarios(vClshorarios, pAccion);
+        }
+
+        [WebMethod]
+        public string MantenimientoVacaciones(string pMedico, String pAccion)
+        {
+            this.vClsvacaciones.aMedico = pMedico;
+
+            return vClsvacaciones.MantenimientoVacaciones(vClsvacaciones, pAccion);
+        }
+
+        [WebMethod]
+        public DataSet GetListaVacaciones(string pMedico, String pAccion)
+        {
+            this.vClsvacaciones.aMedico = pMedico;
+
+            return vClsvacaciones.GetListaVacaciones(vClsvacaciones, pAccion);
         }
     }
 }
