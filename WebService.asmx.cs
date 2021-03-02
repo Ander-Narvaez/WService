@@ -16,9 +16,9 @@ namespace WService
 
         CapaDatos.Clases.ClsPersonas vClspersonas   = new CapaDatos.Clases.ClsPersonas();
         CapaDatos.Clases.ClsMedicos vClsmedicos     = new CapaDatos.Clases.ClsMedicos();
-        CapaDatos.Clases.ClsPacientes vClspacientes = new CapaDatos.Clases.ClsPacientes();
         CapaDatos.Clases.ClsEmpleados vClsempleados = new CapaDatos.Clases.ClsEmpleados();
-
+        CapaDatos.Clases.ClsPacientes vClspacientes = new CapaDatos.Clases.ClsPacientes();
+        
         [WebMethod]
         public string MantenimientoPersona(string pNif, String pNombre_Completo, String pDireccion, String pTelefono, String pPoblacion, String pProvincia, String pCodigo_Postal, String pNum_Seguridad_Social, String pAccion)
         {
@@ -92,7 +92,7 @@ namespace WService
             this.vClsempleados.aNif_Empleado    = pNif_Empleado;
             this.vClsempleados.aPuesto_Empleado = pPuesto_Empleado;
 
-            return vClsempleados.MantenimientoMedicos(vClsempleados, pAccion);
+            return vClsempleados.MantenimientoEmpleados(vClsempleados, pAccion);
         }
 
         [WebMethod]
@@ -102,7 +102,7 @@ namespace WService
             this.vClsempleados.aNif_Empleado = pNif_Empleado;
             this.vClsempleados.aPuesto_Empleado = pPuesto_Empleado;
 
-            return vClsempleados.GetListaMedicos(vClsempleados, pAccion);
+            return vClsempleados.GetListaEmpleados(vClsempleados, pAccion);
         }
 
         [WebMethod]
