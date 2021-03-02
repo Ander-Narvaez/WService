@@ -18,7 +18,8 @@ namespace WService
         CapaDatos.Clases.ClsMedicos vClsmedicos     = new CapaDatos.Clases.ClsMedicos();
         CapaDatos.Clases.ClsEmpleados vClsempleados = new CapaDatos.Clases.ClsEmpleados();
         CapaDatos.Clases.ClsPacientes vClspacientes = new CapaDatos.Clases.ClsPacientes();
-        
+        CapaDatos.Clases.ClsHorarios vClshorarios   = new CapaDatos.Clases.ClsHorarios();
+
         [WebMethod]
         public string MantenimientoPersona(string pNif, String pNombre_Completo, String pDireccion, String pTelefono, String pPoblacion, String pProvincia, String pCodigo_Postal, String pNum_Seguridad_Social, String pAccion)
         {
@@ -122,6 +123,26 @@ namespace WService
             this.vClspacientes.aMedico = pMedico;
 
             return vClspacientes.GetListaPacientes(vClspacientes, pAccion);
+        }
+
+        [WebMethod]
+        public string MantenimientoHorarios(string pDia, String pJornada, String pMedico, String pAccion)
+        {
+            this.vClshorarios.aDia = pDia;
+            this.vClshorarios.aJornada = pJornada;
+            this.vClshorarios.aMedico = pMedico;
+
+            return vClshorarios.MantenimientoHorarios(vClshorarios, pAccion);
+        }
+
+        [WebMethod]
+        public DataSet GetListaHorarios(string pDia, String pJornada, String pMedico, String pAccion)
+        {
+            this.vClshorarios.aDia = pDia;
+            this.vClshorarios.aJornada = pJornada;
+            this.vClshorarios.aMedico = pMedico;
+
+            return vClshorarios.GetListaHorarios(vClshorarios, pAccion);
         }
     }
 }
