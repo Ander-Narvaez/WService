@@ -14,8 +14,10 @@ namespace WService
     public class WebService : System.Web.Services.WebService
     {
 
-        CapaDatos.Clases.ClsPersonas vClspersonas = new CapaDatos.Clases.ClsPersonas();
-        CapaDatos.Clases.ClsMedicos vClsmedicos = new CapaDatos.Clases.ClsMedicos();
+        CapaDatos.Clases.ClsPersonas vClspersonas   = new CapaDatos.Clases.ClsPersonas();
+        CapaDatos.Clases.ClsMedicos vClsmedicos     = new CapaDatos.Clases.ClsMedicos();
+        CapaDatos.Clases.ClsPacientes vClspacientes = new CapaDatos.Clases.ClsPacientes();
+        CapaDatos.Clases.ClsEmpleados vClsempleados = new CapaDatos.Clases.ClsEmpleados();
 
         [WebMethod]
         public string MantenimientoPersona(string pNif, String pNombre_Completo, String pDireccion, String pTelefono, String pPoblacion, String pProvincia, String pCodigo_Postal, String pNum_Seguridad_Social, String pAccion)
@@ -82,6 +84,40 @@ namespace WService
                 }
             }
             return vClsmedicos.GetListaMedicos(vClsmedicos, pAccion);
+        }
+
+         public string MantenimientoEmpleados(string pNif_Empleado, String pPuesto_Empleado, String pAccion)
+        {
+            this.vClsempleados.aNif_Empleado    = pNif_Empleado;
+            this.vClsempleados.aPuesto_Empleado = pPuesto_Empleado;
+
+            return vClsempleados.MantenimientoMedicos(vClsempleados, pAccion);
+        }
+
+         public DataSet GetListaEmpleados(string pNif_Empleado, String pPuesto_Empleado, String pAccion)
+        {
+            DataSet Dts = new DataSet();
+            this.vClsempleados.aNif_Empleado = pNif_Empleado;
+            this.vClsempleados.aPuesto_Empleado = pPuesto_Empleado;
+
+            return vClsempleados.GetListaMedicos(vClsempleados, pAccion);
+        }
+
+         public string MantenimientoPacientes(string pNif_Paciente, String pMedico, String pAccion)
+        {
+            this.vClspacientes.aNif_Paciente = pNif_Paciente;
+            this.vClspacientes.aMedico = pMedico;
+
+            return vClspacientes.MantenimientoPacientes(vClspacientes, pAccion);
+        }
+
+         public DataSet GetListaPacientes(string pNif_Paciente, String pMedico, String pAccion)
+        {
+            DataSet Dts = new DataSet();
+            this.vClspacientes.aNif_Paciente = pNif_Paciente;
+            this.vClspacientes.aMedico = pMedico;
+
+            return vClspacientes.GetListaPacientes(vClspacientes, pAccion);
         }
     }
 }
