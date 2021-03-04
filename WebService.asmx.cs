@@ -52,7 +52,6 @@ namespace WService
             return vClspersonas.GetListaPersonas(vClspersonas, pAccion);
         }
 
-
         public DateTime Convert_Date(String pFecha)
         {
             return DateTime.Parse(pFecha);
@@ -66,7 +65,7 @@ namespace WService
             this.vClsmedicos.aFecha_Baja = Convert_Date(pFecha_Baja); 
             this.vClsmedicos.aNum_Colegiado = pNum_Colegiado;
             this.vClsmedicos.aEstatus = pEstatus;
-
+            
             return vClsmedicos.MantenimientoMedicos(vClsmedicos, pAccion);
         }
 
